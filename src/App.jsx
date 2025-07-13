@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
-import Details from "./pages/Details";
+import RecipeDetail from "./pages/RecipeDetail";
 
 export default function App() {
   return (
@@ -11,8 +11,8 @@ export default function App() {
       <main className="p-4 max-w-5xl mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/recipe/:id" element={<Details />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
         </Routes>
       </main>
     </Router>

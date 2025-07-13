@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function RecipeSearch() {
     const [query, setQuery] = useState("");
@@ -125,13 +126,13 @@ export default function RecipeSearch() {
             {!loading && recipes.length > 0 && (
                 <div className="grid md:grid-cols-3 gap-4">
                     {recipes.map((meal) => (
-                        <div key={meal.idMeal} className="bg-white p-4 rounded shadow">
-                            <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded mb-2" />
-                            <h2 className="text-lg font-semibold">{meal.strMeal}</h2>
-                            <p className="text-sm text-gray-500">
-                                {meal.strArea} – Prep time: {meal.prepTime} min
-                            </p>
-                        </div>
+                        <Link to={`/recipe/${meal.idMeal}`} key={meal.idMeal}>
+                            <div className="bg-white p-4 rounded shadow hover:shadow-md transition">
+                                <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded mb-2" />
+                                <h2 className="text-lg font-semibold">{meal.strMeal}</h2>
+                                <p className="text-sm text-gray-500">{meal.strArea} - {meal.strCategory}</p>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             )}
