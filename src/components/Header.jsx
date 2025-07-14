@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 export default function Header() {
   return (
     <header className="bg-white border-b border-teal-200 shadow-sm px-6 py-4 font-serif">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-teal-500 flex items-center gap-2">
-          🍽️ <span className="tracking-wide">Recipe Explorer</span>
+           <img src={logo} alt="Logo" className="h-20" />
         </Link>
 
         <nav className="space-x-6 text-gray-600 text-sm font-medium">
