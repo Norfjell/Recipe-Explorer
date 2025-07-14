@@ -81,40 +81,63 @@ export default function RecipeSearch() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className="mb-6 grid md:grid-cols-4 gap-2">
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search for recipes..."
-                    className="p-2 border rounded col-span-2"
-                />
+            <form
+                onSubmit={handleSubmit}
+                className="mb-8 bg-white border border-teal-200 rounded-lg shadow p-6 space-y-4"
+            >
+                <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+                    🔍 Search Recipes
+                </h2>
 
-                <select
-                    value={selectedArea}
-                    onChange={(e) => setSelectedArea(e.target.value)}
-                    className="p-2 border rounded"
-                >
-                    <option value="">All Areas</option>
-                    {areas.map((area) => (
-                        <option key={area} value={area}>{area}</option>
-                    ))}
-                </select>
+                <div className="grid md:grid-cols-4 gap-4">
+                    {/* Query Input */}
+                    <div className="relative col-span-2">
+                        <label className="text-sm font-medium text-gray-600 block mb-1">Recipe Name</label>
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="e.g. Chicken Alfredo"
+                            className="w-full p-2 pl-10 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                        />
+                    </div>
 
-                <select
-                    value={sortOption}
-                    onChange={(e) => setSortOption(e.target.value)}
-                    className="p-2 border rounded"
-                >
-                    <option value="name-asc">Name: A → Z</option>
-                    <option value="name-desc">Name: Z → A</option>
-                    <option value="prep-asc">Prep Time: Low → High</option>
-                    <option value="prep-desc">Prep Time: High → Low</option>
-                </select>
+                    {/* Area Filter */}
+                    <div>
+                        <label className="text-sm font-medium text-gray-600 block mb-1">🌍 Area</label>
+                        <select
+                            value={selectedArea}
+                            onChange={(e) => setSelectedArea(e.target.value)}
+                            className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                        >
+                            <option value="">All Areas</option>
+                            {areas.map((area) => (
+                                <option key={area} value={area}>
+                                    {area}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Sort Filter */}
+                    <div>
+                        <label className="text-sm font-medium text-gray-600 block mb-1">📊 Sort By</label>
+                        <select
+                            value={sortOption}
+                            onChange={(e) => setSortOption(e.target.value)}
+                            className="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-300"
+                        >
+                            <option value="name-asc">Name: A → Z</option>
+                            <option value="name-desc">Name: Z → A</option>
+                            <option value="prep-asc">Prep: Low → High</option>
+                            <option value="prep-desc">Prep: High → Low</option>
+                        </select>
+                    </div>
+                </div>
 
                 <button
                     type="submit"
-                    className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 col-span-full md:col-auto"
+                    className="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-medium px-6 py-2 rounded transition"
                 >
                     Search
                 </button>
@@ -127,10 +150,18 @@ export default function RecipeSearch() {
                 <div className="grid md:grid-cols-3 gap-4">
                     {recipes.map((meal) => (
                         <Link to={`/recipe/${meal.idMeal}`} key={meal.idMeal}>
-                            <div className="bg-white p-4 rounded shadow hover:shadow-md transition">
-                                <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded mb-2" />
-                                <h2 className="text-lg font-semibold">{meal.strMeal}</h2>
-                                <p className="text-sm text-gray-500">{meal.strArea} - {meal.strCategory}</p>
+                            <div className="bg-white rounded shadow hover:shadow-md transition h-full flex flex-col">
+                                <img
+                                    src={meal.strMealThumb}
+                                    alt={meal.strMeal}
+                                    className="rounded-t w-full h-48 object-cover"
+                                />
+                                <div className="flex-1 p-4 flex flex-col justify-between">
+                                    <div>
+                                        <h2 className="text-lg font-semibold text-gray-800 mb-1">{meal.strMeal}</h2>
+                                        <p className="text-sm text-gray-500">{meal.strArea} - {meal.strCategory}</p>
+                                    </div>
+                                </div>
                             </div>
                         </Link>
                     ))}
